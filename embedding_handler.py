@@ -13,8 +13,8 @@ class EmbeddingNN:
         assert type(embedding_dim) is int, "embedding dimension must be an integer"
         
         self.embedding_dim = embedding_dim
-        #vocab_to_nn[hero representation] = internal embedding id
-        #nn_to_vocab[internal embedding id] = hero representation
+        #api_to_nn[hero representation] = internal embedding id
+        #nn_to_api[internal embedding id] = hero representation
         #The api keys supplied by open dota do not align with the index of the hero,
         #e.g. Mars' api key is 129 but there are only 117 heroes so these dictionaries will map each key to
         #an integer between 1 and 117 so the embedding will not have extraneous nodes.
@@ -22,22 +22,27 @@ class EmbeddingNN:
         self.nn_to_api = {}
         self.nn_to_name = {}
         self.name_to_nn = {}
+        
         for i in range(len(heroes_df['id'])):
             self.api_to_nn[heroes_df['id'][i]] = i+1
             self.nn_to_api[i+1] = heroes_df['id'][i]
             self.nn_to_name[i+1] = heroes_df['localized_name'].iloc[i]
             self.name_to_nn[heroes_df['localized_name'].iloc[i]] = i+1
+
         #Assembling the untrained model
         #Here we assemble the embedding layer to take in the hero and its teammate as inputs
         embedding_layer = layers.Embedding(len(heroes_df['id']),embedding_dim,input_length=1)
+
         #Main hero input
         target_hero_input = tf.keras.Input(shape=(1,))
         target_hero_embedding = embedding_layer(target_hero_input)
         target_hero_embedding = layers.Reshape((embedding_dim,1))(target_hero_embedding)
+
         #The main hero's teammate's hero input
         teammate_hero_input = tf.keras.Input(shape=(1,))
         teammate_hero_embedding = embedding_layer(teammate_hero_input)
         teammate_hero_embedding = layers.Reshape((embedding_dim,1))(teammate_hero_embedding)
+
         #merging the outputs of the embedding layer outputs
         merged_embedding_dotproduct = keras.layers.dot(
             inputs=[target_hero_embedding, teammate_hero_embedding],
@@ -102,7 +107,7 @@ class EmbeddingNN:
         print("Training complete")
         
     def k_closest_heroes(self, hero_name, k):
-        #Prints the k most similar heroes to the input hero_name according to their cosine similarity,
+        #Returns the k most similar heroes to the input hero_name according to their cosine similarity,
         #NOT according to euclidean distance
         name_to_cossim = {}
         target_hero = np.zeros((1,))
