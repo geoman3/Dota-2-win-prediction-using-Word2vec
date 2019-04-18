@@ -7,11 +7,13 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras import utils
 
+
 class EmbeddingNN:
 
     def __init__(self, heroes_df, embedding_dim):
-        assert type(embedding_dim) is int, "embedding dimension must be an integer"
-        
+        assert type(
+            embedding_dim) is int, "embedding dimension must be an integer"
+
         self.embedding_dim = embedding_dim
         #api_to_nn[hero representation] = internal embedding id
         #nn_to_api[internal embedding id] = hero representation
@@ -49,30 +51,35 @@ class EmbeddingNN:
             axes=1,
             normalize=False
         )
-        merged_embedding_dotproduct = layers.Reshape((1,))(merged_embedding_dotproduct)
-        
-        output_node = layers.Dense(1, activation="sigmoid")(merged_embedding_dotproduct)
-        
-        model = keras.Model([target_hero_input, teammate_hero_input], output_node)
-        model.compile(loss='binary_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+        merged_embedding_dotproduct = layers.Reshape(
+            (1,))(merged_embedding_dotproduct)
+
+        output_node = layers.Dense(1, activation="sigmoid")(
+            merged_embedding_dotproduct)
+
+        model = keras.Model(
+            [target_hero_input, teammate_hero_input], output_node)
+        model.compile(loss='binary_crossentropy',
+                      optimizer='rmsprop', metrics=['accuracy'])
         self.compiled_network = model
-        #Here we define a secondary model which we can pass a pair of heroes into to get a measure 
-        #of how similar their embeddings are (bigger number = more similar).
+        # Here we define a secondary model which we can pass a pair of heroes into to get a measure
+        # of how similar their embeddings are (bigger number = more similar).
         cos_similarity_layer = keras.layers.dot(
             inputs=[target_hero_embedding, teammate_hero_embedding],
             axes=0,
             normalize=True
         )
-        self.cos_sim_model = keras.Model([target_hero_input, teammate_hero_input], cos_similarity_layer)
-        
+        self.cos_sim_model = keras.Model(
+            [target_hero_input, teammate_hero_input], cos_similarity_layer)
+
         print(model.summary())
         print("Model succesfully assembled, pass self.load_data(data) to prepare your data for training")
 
     def load_odota_data(self, data):
         data = list(data)
-        #The summary data we pulled from the open dota api gave the heroes as a single string with the 
-        #api keys separated by commas, so we need to convert this string of api keys to a list of integers
-        #that correspond to the index of the hero
+        # The summary data we pulled from the open dota api gave the heroes as a single string with the
+        # api keys separated by commas, so we need to convert this string of api keys to a list of integers
+        # that correspond to the index of the hero
         data = [team.split(",") for team in data]
         for team in range(len(data)):
             data[team] = [int(hero) for hero in data[team]]
@@ -81,9 +88,10 @@ class EmbeddingNN:
                 data[i][j] = self.api_to_nn[hero]
         couples_list = []
         labels_list = []
-        #the skipgrams keras function generates a sequence of pairs from the supplied data and labels it 1 or 0
-        #where a pair labeled 1 the teammate was on the target hero's team, and 0 if the pair did not appear in
-        #in the target hero's team
+        
+        # the skipgrams keras function generates a sequence of pairs from the supplied data and labels it 1 or 0
+        # where a pair labeled 1 the teammate was on the target hero's team, and 0 if the pair did not appear in
+        # in the target hero's team
         for team in data:
             couples, labels = keras.preprocessing.sequence.skipgrams(
                 sequence=team,
@@ -98,14 +106,14 @@ class EmbeddingNN:
         self.teammate_hero = np.array(teammate_hero, dtype="int32")
         self.labels = labels_list
         print("Data successfully loaded into model object, pass self.train_model() to train the model")
-    
+
     def train_model(self, num_in_batch, num_epochs):
         self.history = self.compiled_network.fit((self.target_hero, self.teammate_hero), self.labels,
-                                 batch_size=num_in_batch,
-                                 epochs=num_epochs,
-                                 validation_split=0.1)
+                                                 batch_size=num_in_batch,
+                                                 epochs=num_epochs,
+                                                 validation_split=0.1)
         print("Training complete")
-        
+
     def k_closest_heroes(self, hero_name, k):
         #Returns the k most similar heroes to the input hero_name according to their cosine similarity,
         #NOT according to euclidean distance
@@ -115,27 +123,29 @@ class EmbeddingNN:
         for nn, hero in self.nn_to_name.items():
             adjacent_hero = np.zeros((1,))
             adjacent_hero[0] = nn
-            name_to_cossim[hero] = self.cos_sim_model.predict((target_hero, adjacent_hero))
+            name_to_cossim[hero] = self.cos_sim_model.predict(
+                (target_hero, adjacent_hero))
         return sorted(name_to_cossim, key=name_to_cossim.get, reverse=True)[:k]
-    
+
     def save_model(self, file_name):
         assert type(file_name) is str, "file_name must be a string"
         assert file_name[-3:] = ".h5", "file_name must end in: \".h5\""
-        self.compiled_network.save_weights("./models/"+file_name, save_format='h5')
-        print("The model has been saved under: "+"./models/"+file_name)
-        
+        self.compiled_network.save_weights(
+            "./models/" + file_name, save_format='h5')
+        print("The model has been saved under: " + "./models/" + file_name)
+
     def load_model(self, file_name):
         assert type(file_name) is str, "file_name must be a string"
-        self.compiled_network.load_weights("./models/"+file_name)
+        self.compiled_network.load_weights("./models/" + file_name)
         print("Model successfully loaded.")
 
     def visualise_embedding(self):
-        #Outputs a 2D t-SNE visualisation of the hero embedding
+        # Outputs a 2D t-SNE visualisation of the hero embedding
         embedding = x.compiled_network.layers[2].get_weights()[0]
         embedding_tsne = TSNE(n_components=2).fit_transform(embeddo)
-        x = embedding_tsne[:,0]
-        y = embedding_tsne[:,1]
-        plt.figure(figsize=(50,25))
+        x = embedding_tsne[:, 0]
+        y = embedding_tsne[:, 1]
+        plt.figure(figsize=(50, 25))
         plt.scatter(x, y)
         for i, name in nn_to_name.items():
             plt.annotate(name, (x[i], y[i]))
