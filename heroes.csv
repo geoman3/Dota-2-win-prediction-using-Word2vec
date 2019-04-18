@@ -1,0 +1,118 @@
+attack_type,id,legs,localized_name,name,primary_attr,Pusher,Jungler,Support,Carry,Initiator,Escape,Durable,Nuker,Disabler
+Melee,1,2,Anti-Mage,npc_dota_hero_antimage,agi,False,False,False,True,False,True,False,True,False
+Melee,2,2,Axe,npc_dota_hero_axe,str,False,True,False,False,True,False,True,False,True
+Ranged,3,4,Bane,npc_dota_hero_bane,int,False,False,True,False,False,False,True,True,True
+Melee,4,2,Bloodseeker,npc_dota_hero_bloodseeker,agi,False,True,False,True,True,False,False,True,True
+Ranged,5,2,Crystal Maiden,npc_dota_hero_crystal_maiden,int,False,True,True,False,False,False,False,True,True
+Ranged,6,2,Drow Ranger,npc_dota_hero_drow_ranger,agi,True,False,False,True,False,False,False,False,True
+Melee,7,2,Earthshaker,npc_dota_hero_earthshaker,str,False,False,True,False,True,False,False,True,True
+Melee,8,2,Juggernaut,npc_dota_hero_juggernaut,agi,True,False,False,True,False,True,False,False,False
+Ranged,9,2,Mirana,npc_dota_hero_mirana,agi,False,False,True,True,False,True,False,True,True
+Ranged,10,0,Morphling,npc_dota_hero_morphling,agi,False,False,False,True,False,True,True,True,True
+Ranged,11,0,Shadow Fiend,npc_dota_hero_nevermore,agi,False,False,False,True,False,False,False,True,False
+Melee,12,2,Phantom Lancer,npc_dota_hero_phantom_lancer,agi,True,False,False,True,False,True,False,True,False
+Ranged,13,2,Puck,npc_dota_hero_puck,int,False,False,False,False,True,True,False,True,True
+Melee,14,2,Pudge,npc_dota_hero_pudge,str,False,False,False,False,True,False,True,True,True
+Ranged,15,0,Razor,npc_dota_hero_razor,agi,True,False,False,True,False,False,True,True,False
+Melee,16,6,Sand King,npc_dota_hero_sand_king,str,False,True,True,False,True,True,False,True,True
+Ranged,17,2,Storm Spirit,npc_dota_hero_storm_spirit,int,False,False,False,True,True,True,False,True,True
+Melee,18,2,Sven,npc_dota_hero_sven,str,False,False,False,True,True,False,True,True,True
+Melee,19,2,Tiny,npc_dota_hero_tiny,str,True,False,False,True,True,False,True,True,True
+Ranged,20,2,Vengeful Spirit,npc_dota_hero_vengefulspirit,agi,False,False,True,False,True,True,False,True,True
+Ranged,21,2,Windranger,npc_dota_hero_windrunner,int,False,False,True,True,False,True,False,True,True
+Ranged,22,2,Zeus,npc_dota_hero_zuus,int,False,False,False,False,False,False,False,True,False
+Melee,23,2,Kunkka,npc_dota_hero_kunkka,str,False,False,True,True,True,False,True,True,True
+Ranged,25,2,Lina,npc_dota_hero_lina,int,False,False,True,True,False,False,False,True,True
+Ranged,26,2,Lion,npc_dota_hero_lion,int,False,False,True,False,True,False,False,True,True
+Ranged,27,2,Shadow Shaman,npc_dota_hero_shadow_shaman,int,True,False,True,False,True,False,False,True,True
+Melee,28,0,Slardar,npc_dota_hero_slardar,str,False,False,False,True,True,True,True,False,True
+Melee,29,2,Tidehunter,npc_dota_hero_tidehunter,str,False,False,False,False,True,False,True,True,True
+Ranged,30,2,Witch Doctor,npc_dota_hero_witch_doctor,int,False,False,True,False,False,False,False,True,True
+Ranged,31,2,Lich,npc_dota_hero_lich,int,False,False,True,False,False,False,False,True,False
+Melee,32,2,Riki,npc_dota_hero_riki,agi,False,False,False,True,False,True,False,False,True
+Ranged,33,0,Enigma,npc_dota_hero_enigma,int,True,True,False,False,True,False,False,False,True
+Ranged,34,2,Tinker,npc_dota_hero_tinker,int,True,False,False,True,False,False,False,True,False
+Ranged,35,2,Sniper,npc_dota_hero_sniper,agi,False,False,False,True,False,False,False,True,False
+Ranged,36,2,Necrophos,npc_dota_hero_necrolyte,int,False,False,False,True,False,False,True,True,True
+Ranged,37,2,Warlock,npc_dota_hero_warlock,int,False,False,True,False,True,False,False,False,True
+Melee,38,2,Beastmaster,npc_dota_hero_beastmaster,str,False,False,False,False,True,False,True,True,True
+Ranged,39,2,Queen of Pain,npc_dota_hero_queenofpain,int,False,False,False,True,False,True,False,True,False
+Ranged,40,0,Venomancer,npc_dota_hero_venomancer,agi,True,False,True,False,True,False,False,True,True
+Melee,41,2,Faceless Void,npc_dota_hero_faceless_void,agi,False,False,False,True,True,True,True,False,True
+Melee,42,2,Wraith King,npc_dota_hero_skeleton_king,str,False,False,True,True,True,False,True,False,True
+Ranged,43,2,Death Prophet,npc_dota_hero_death_prophet,int,True,False,False,True,False,False,False,True,True
+Melee,44,2,Phantom Assassin,npc_dota_hero_phantom_assassin,agi,False,False,False,True,False,True,False,False,False
+Ranged,45,2,Pugna,npc_dota_hero_pugna,int,True,False,False,False,False,False,False,True,False
+Ranged,46,2,Templar Assassin,npc_dota_hero_templar_assassin,agi,False,False,False,True,False,True,False,False,False
+Ranged,47,0,Viper,npc_dota_hero_viper,agi,False,False,False,True,True,False,True,False,True
+Ranged,48,2,Luna,npc_dota_hero_luna,agi,True,False,False,True,False,False,False,True,False
+Melee,49,2,Dragon Knight,npc_dota_hero_dragon_knight,str,True,False,False,True,True,False,True,True,True
+Ranged,50,2,Dazzle,npc_dota_hero_dazzle,int,False,False,True,False,False,False,False,True,True
+Melee,51,2,Clockwerk,npc_dota_hero_rattletrap,str,False,False,False,False,True,False,True,True,True
+Ranged,52,4,Leshrac,npc_dota_hero_leshrac,int,True,False,True,True,False,False,False,True,True
+Ranged,53,2,Nature's Prophet,npc_dota_hero_furion,int,True,True,False,True,False,True,False,True,False
+Melee,54,2,Lifestealer,npc_dota_hero_life_stealer,str,False,True,False,True,False,True,True,False,True
+Melee,55,2,Dark Seer,npc_dota_hero_dark_seer,int,False,True,False,False,True,True,False,False,True
+Ranged,56,2,Clinkz,npc_dota_hero_clinkz,agi,True,False,False,True,False,True,False,False,False
+Melee,57,2,Omniknight,npc_dota_hero_omniknight,str,False,False,True,False,False,False,True,True,False
+Ranged,58,4,Enchantress,npc_dota_hero_enchantress,int,True,True,True,False,False,False,True,False,True
+Ranged,59,2,Huskar,npc_dota_hero_huskar,str,False,False,False,True,True,False,True,False,False
+Melee,60,2,Night Stalker,npc_dota_hero_night_stalker,str,False,False,False,True,True,False,True,True,True
+Melee,61,8,Broodmother,npc_dota_hero_broodmother,agi,True,False,False,True,False,True,False,True,False
+Melee,62,2,Bounty Hunter,npc_dota_hero_bounty_hunter,agi,False,False,False,False,False,True,False,True,False
+Ranged,63,4,Weaver,npc_dota_hero_weaver,agi,False,False,False,True,False,True,False,False,False
+Ranged,64,2,Jakiro,npc_dota_hero_jakiro,int,True,False,True,False,False,False,False,True,True
+Ranged,65,2,Batrider,npc_dota_hero_batrider,int,False,True,False,False,True,True,False,False,True
+Ranged,66,2,Chen,npc_dota_hero_chen,int,True,True,True,False,False,False,False,False,False
+Melee,67,0,Spectre,npc_dota_hero_spectre,agi,False,False,False,True,False,True,True,False,False
+Ranged,68,2,Ancient Apparition,npc_dota_hero_ancient_apparition,int,False,False,True,False,False,False,False,True,True
+Melee,69,2,Doom,npc_dota_hero_doom_bringer,str,False,False,False,True,True,False,True,True,True
+Melee,70,2,Ursa,npc_dota_hero_ursa,agi,False,True,False,True,False,False,True,False,True
+Melee,71,2,Spirit Breaker,npc_dota_hero_spirit_breaker,str,False,False,False,True,True,True,True,False,True
+Ranged,72,2,Gyrocopter,npc_dota_hero_gyrocopter,agi,False,False,False,True,False,False,False,True,True
+Melee,73,2,Alchemist,npc_dota_hero_alchemist,str,False,False,True,True,True,False,True,True,True
+Ranged,74,2,Invoker,npc_dota_hero_invoker,int,True,False,False,True,False,True,False,True,True
+Ranged,75,2,Silencer,npc_dota_hero_silencer,int,False,False,True,True,True,False,False,True,True
+Ranged,76,4,Outworld Devourer,npc_dota_hero_obsidian_destroyer,int,False,False,False,True,False,False,False,True,True
+Melee,77,2,Lycan,npc_dota_hero_lycan,str,True,True,False,True,False,True,True,False,False
+Melee,78,2,Brewmaster,npc_dota_hero_brewmaster,str,False,False,False,True,True,False,True,True,True
+Ranged,79,2,Shadow Demon,npc_dota_hero_shadow_demon,int,False,False,True,False,True,False,False,True,True
+Ranged,80,2,Lone Druid,npc_dota_hero_lone_druid,agi,True,True,False,True,False,False,True,False,False
+Melee,81,2,Chaos Knight,npc_dota_hero_chaos_knight,str,True,False,False,True,True,False,True,False,True
+Melee,82,2,Meepo,npc_dota_hero_meepo,agi,True,False,False,True,True,True,False,True,True
+Melee,83,2,Treant Protector,npc_dota_hero_treant,str,False,False,True,False,True,True,True,False,True
+Melee,84,2,Ogre Magi,npc_dota_hero_ogre_magi,int,False,False,True,False,True,False,True,True,True
+Melee,85,2,Undying,npc_dota_hero_undying,str,False,False,True,False,False,False,True,True,True
+Ranged,86,2,Rubick,npc_dota_hero_rubick,int,False,False,True,False,False,False,False,True,True
+Ranged,87,2,Disruptor,npc_dota_hero_disruptor,int,False,False,True,False,True,False,False,True,True
+Melee,88,6,Nyx Assassin,npc_dota_hero_nyx_assassin,agi,False,False,False,False,True,True,False,True,True
+Melee,89,0,Naga Siren,npc_dota_hero_naga_siren,agi,True,False,True,True,True,True,False,False,True
+Ranged,90,2,Keeper of the Light,npc_dota_hero_keeper_of_the_light,int,False,True,True,False,False,False,False,True,True
+Ranged,91,0,Io,npc_dota_hero_wisp,str,False,False,True,False,False,True,False,True,False
+Ranged,92,2,Visage,npc_dota_hero_visage,int,True,False,True,False,False,False,True,True,True
+Melee,93,2,Slark,npc_dota_hero_slark,agi,False,False,False,True,False,True,False,True,True
+Ranged,94,0,Medusa,npc_dota_hero_medusa,agi,False,False,False,True,False,False,True,False,True
+Ranged,95,2,Troll Warlord,npc_dota_hero_troll_warlord,agi,True,False,False,True,False,False,True,False,True
+Melee,96,4,Centaur Warrunner,npc_dota_hero_centaur,str,False,False,False,False,True,True,True,True,True
+Melee,97,4,Magnus,npc_dota_hero_magnataur,str,False,False,False,False,True,True,False,True,True
+Melee,98,2,Timbersaw,npc_dota_hero_shredder,str,False,False,False,False,False,True,True,True,False
+Melee,99,2,Bristleback,npc_dota_hero_bristleback,str,False,False,False,True,True,False,True,True,False
+Melee,100,2,Tusk,npc_dota_hero_tusk,str,False,False,False,False,True,False,False,True,True
+Ranged,101,2,Skywrath Mage,npc_dota_hero_skywrath_mage,int,False,False,True,False,False,False,False,True,True
+Melee,102,2,Abaddon,npc_dota_hero_abaddon,str,False,False,True,True,False,False,True,False,False
+Melee,103,2,Elder Titan,npc_dota_hero_elder_titan,str,False,False,False,False,True,False,True,True,True
+Melee,104,2,Legion Commander,npc_dota_hero_legion_commander,str,False,False,False,True,True,False,True,True,True
+Ranged,105,6,Techies,npc_dota_hero_techies,int,False,False,False,False,False,False,False,True,True
+Melee,106,2,Ember Spirit,npc_dota_hero_ember_spirit,agi,False,False,False,True,True,True,False,True,True
+Melee,107,2,Earth Spirit,npc_dota_hero_earth_spirit,str,False,False,False,False,True,True,True,True,True
+Melee,108,2,Underlord,npc_dota_hero_abyssal_underlord,str,False,False,True,False,False,True,True,True,True
+Melee,109,2,Terrorblade,npc_dota_hero_terrorblade,agi,True,False,False,True,False,False,False,True,False
+Ranged,110,2,Phoenix,npc_dota_hero_phoenix,str,False,False,True,False,True,True,False,True,True
+Ranged,111,2,Oracle,npc_dota_hero_oracle,int,False,False,True,False,False,True,False,True,True
+Ranged,112,2,Winter Wyvern,npc_dota_hero_winter_wyvern,int,False,False,True,False,False,False,False,True,True
+Ranged,113,2,Arc Warden,npc_dota_hero_arc_warden,agi,False,False,False,True,False,True,False,True,False
+Melee,114,2,Monkey King,npc_dota_hero_monkey_king,agi,False,False,False,True,True,True,False,False,True
+Ranged,119,2,Dark Willow,npc_dota_hero_dark_willow,int,False,False,True,False,False,True,False,True,True
+Melee,120,2,Pangolier,npc_dota_hero_pangolier,agi,False,False,False,True,True,True,True,True,True
+Ranged,121,2,Grimstroke,npc_dota_hero_grimstroke,int,False,False,True,False,False,True,False,True,True
+Melee,129,2,Mars,npc_dota_hero_mars,str,False,False,False,True,True,False,True,False,True
