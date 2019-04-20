@@ -129,7 +129,7 @@ class EmbeddingNN:
 
     def save_model(self, file_name):
         assert type(file_name) is str, "file_name must be a string"
-        assert file_name[-3:] = ".h5", "file_name must end in: \".h5\""
+        assert file_name[-3:] == ".h5", "file_name must end in: \".h5\""
         self.compiled_network.save_weights(
             "./models/" + file_name, save_format='h5')
         print("The model has been saved under: " + "./models/" + file_name)
