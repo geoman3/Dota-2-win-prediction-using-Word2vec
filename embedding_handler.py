@@ -160,7 +160,7 @@ class EmbeddingNN:
         embed_vec = hero_model.predict(hero_number)
         return embed_vec
 
-     def visualise_embedding(self):
+    def visualise_embedding(self):
         # Outputs a 2D t-SNE visualisation of the hero embedding
         embedding = np.zeros(size=(len(self.heroes_df), self.embedding_dim))
 
