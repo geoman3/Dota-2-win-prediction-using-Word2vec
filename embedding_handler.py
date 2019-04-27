@@ -13,8 +13,8 @@ class EmbeddingNN:
     def __init__(self, heroes_df, embedding_dim):
         assert type(
             embedding_dim) is int, "embedding dimension must be an integer"
-
         self.embedding_dim = embedding_dim
+        self.heroes_df = heroes_df
         #api_to_nn[hero representation] = internal embedding id
         #nn_to_api[internal embedding id] = hero representation
         #The api keys supplied by open dota do not align with the index of the hero,
@@ -25,6 +25,7 @@ class EmbeddingNN:
         self.nn_to_name = {}
         self.name_to_nn = {}
         
+        #here we assemble the necessary dictionaries to convert between the different hero representations
         for i in range(len(heroes_df['id'])):
             self.api_to_nn[heroes_df['id'][i]] = i+1
             self.nn_to_api[i+1] = heroes_df['id'][i]
@@ -62,6 +63,7 @@ class EmbeddingNN:
         model.compile(loss='binary_crossentropy',
                       optimizer='rmsprop', metrics=['accuracy'])
         self.compiled_network = model
+
         # Here we define a secondary model which we can pass a pair of heroes into to get a measure
         # of how similar their embeddings are (bigger number = more similar).
         cos_similarity_layer = keras.layers.dot(
@@ -77,6 +79,7 @@ class EmbeddingNN:
 
     def load_odota_data(self, data):
         data = list(data)
+
         # The summary data we pulled from the open dota api gave the heroes as a single string with the
         # api keys separated by commas, so we need to convert this string of api keys to a list of integers
         # that correspond to the index of the hero
@@ -120,6 +123,7 @@ class EmbeddingNN:
         name_to_cossim = {}
         target_hero = np.zeros((1,))
         target_hero[0] = self.name_to_nn[hero_name]
+
         for nn, hero in self.nn_to_name.items():
             adjacent_hero = np.zeros((1,))
             adjacent_hero[0] = nn
@@ -139,14 +143,35 @@ class EmbeddingNN:
         self.compiled_network.load_weights("./models/" + file_name)
         print("Model successfully loaded.")
 
-    def visualise_embedding(self):
+    def get_hero_embedding(self, hero_name=None, hero_nn_number=None):
+        #this method expects only one of the arguments as input, I havnt figured out
+        #how to properly make sure this is the case, so dont break it in the mean time
+        if hero_nn_number == None:
+            hero_number = self.name_to_nn[hero_name]
+        else:
+            hero_number = hero_nn_number
+        #here we define a model which will return the embedding for a hero based on the internal NN key 
+        # (i.e. integer 1-117 --> numpy array of size=embedding_dim)
+        hero_input = tf.keras.Input(shape=1)
+        hero_output = self.compiled_network.layers[2](hero_input)
+        hero_model = tf.keras.Model(inputs=hero_input, outputs=hero_output)
+
+        #now we predict the output of the integer to obtain the embedding
+        embed_vec = hero_model.predict(hero_number)
+        return embed_vec
+
+     def visualise_embedding(self):
         # Outputs a 2D t-SNE visualisation of the hero embedding
-        embedding = x.compiled_network.layers[2].get_weights()[0]
-        embedding_tsne = TSNE(n_components=2).fit_transform(embeddo)
+        embedding = np.zeros(size=(len(self.heroes_df), self.embedding_dim))
+
+        for i in range(len(self.heroes_df)):
+            embedding[i,:] = self.get_hero_embedding(hero_nn_number=(i+1))
+        embedding_tsne = TSNE(n_components=2).fit_transform(embedding)
         x = embedding_tsne[:, 0]
         y = embedding_tsne[:, 1]
         plt.figure(figsize=(50, 25))
         plt.scatter(x, y)
+
         for i, name in nn_to_name.items():
             plt.annotate(name, (x[i], y[i]))
         plt.show()
