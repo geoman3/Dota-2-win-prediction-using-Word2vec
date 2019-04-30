@@ -172,6 +172,6 @@ class EmbeddingNN:
         plt.figure(figsize=(50, 25))
         plt.scatter(x, y)
 
-        for i, name in nn_to_name.items():
+        for i, name in self.nn_to_name.items():
             plt.annotate(name, (x[i], y[i]))
         plt.show()
