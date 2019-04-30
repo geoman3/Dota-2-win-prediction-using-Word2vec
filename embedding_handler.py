@@ -111,10 +111,13 @@ class EmbeddingNN:
         print("Data successfully loaded into model object, pass self.train_model() to train the model")
 
     def train_model(self, num_in_batch, num_epochs):
-        self.history = self.compiled_network.fit((self.target_hero, self.teammate_hero), self.labels,
-                                                 batch_size=num_in_batch,
-                                                 epochs=num_epochs,
-                                                 validation_split=0.1)
+        self.history = self.compiled_network.fit(
+            (self.target_hero, self.teammate_hero),
+            self.labels,
+            batch_size=num_in_batch,
+            epochs=num_epochs,
+            validation_split=0.1
+        )
         print("Training complete")
 
     def k_closest_heroes(self, hero_name, k):
