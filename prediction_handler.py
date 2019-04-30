@@ -45,7 +45,7 @@ class PredictionNN:
 
             rad_sum = np.zeros(shape=self.embedding_handler.embedding_dim)
             for hero in rad_teams[i]:
-                rad_sum=rad_sum+self.embedding_handler.get_hero_embedding(hero)
+                rad_sum=rad_sum+self.embedding_handler.get_hero_embedding(hero_nn_number=hero)
             embed_sum[i,:self.embedding_handler.embedding_dim] = rad_sum
 
             dir_sum = np.zeros(shape=self.embedding_handler.embedding_dim)

@@ -146,21 +146,8 @@ class EmbeddingNN:
         self.compiled_network.load_weights("./models/" + file_name)
         print("Model successfully loaded.")
 
-    def get_hero_embedding(self, hero_name=None, hero_nn_number=None):
-        #this method expects only one of the arguments as input, I havnt figured out
-        #how to properly make sure this is the case, so dont break it in the mean time
-        if hero_nn_number == None:
-            hero_number = self.name_to_nn[hero_name]
-        else:
-            hero_number = hero_nn_number
-        #here we define a model which will return the embedding for a hero based on the internal NN key 
-        # (i.e. integer 1-117 --> numpy array of size=embedding_dim)
-        hero_input = tf.keras.Input(shape=1)
-        hero_output = self.compiled_network.layers[2](hero_input)
-        hero_model = tf.keras.Model(inputs=hero_input, outputs=hero_output)
-
-        #now we predict the output of the integer to obtain the embedding
-        embed_vec = hero_model.predict(hero_number)
+    def get_hero_embedding(self, hero_nn_number):
+        embed_vec = self.compiled_network.layers[2].get_weights()[0][hero_nn_number-1,:]
         return embed_vec
 
     def visualise_embedding(self):
