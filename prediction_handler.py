@@ -76,5 +76,3 @@ class PredictionNN:
         assert type(file_name) is str, "file_name must be a string"
         self.compiled_network.load_weights("./models/" + file_name)
         print("Model successfully loaded.")
-
-    
