@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 from tensorflow import keras
-from tensoreflow.keras import layers
+from tensorflow.keras import layers
 
 class PredictionNN:
     
@@ -18,21 +18,22 @@ class PredictionNN:
         self.predictor_network = predictor_network
 
     def load_odota_data(self, data):
-        dir_teams = data['dire_team']
-        rad_teams = data['radiant_team']
-        labels = data['radiant_win']
+        dir_teams = list(data['dire_team'])
+        rad_teams = list(data['radiant_team'])
+        labels = list(data['radiant_win'])
         dir_teams = [team.split(",") for team in dir_teams]
         rad_teams = [team.split(",") for team in rad_teams]
 
         #here convert each list of teams to the internal nn integer key
         for team in range(len(rad_teams)):
-            rad_teams[team] = [int(hero) for hero in rad_teams[team]
+            rad_teams[team] = [int(hero) for hero in rad_teams[team]]
+            
         for i, team in enumerate(rad_teams):
             for j, hero in enumerate(team):
                 rad_teams[i][j] = self.embedding_handler.api_to_nn[hero]
 
         for team in range(len(dir_teams)):
-            dir_teams[team] = [int(hero) for hero in dir_teams[team]
+            dir_teams[team] = [int(hero) for hero in dir_teams[team]]
         for i, team in enumerate(dir_teams):
             for j, hero in enumerate(team):
                 dir_teams[i][j] = self.embedding_handler.api_to_nn[hero]
@@ -43,7 +44,7 @@ class PredictionNN:
         for i in range(len(dir_teams)):
 
             rad_sum = np.zeros(shape=self.embedding_handler.embedding_dim)
-            for hero in rad_teams[i]]:
+            for hero in rad_teams[i]:
                 rad_sum=rad_sum+self.embedding_handler.get_hero_embedding(hero)
             embed_sum[i,:self.embedding_handler.embedding_dim] = rad_sum
 
@@ -68,11 +69,11 @@ class PredictionNN:
     def save_model(self, file_name):
         assert type(file_name) is str, "file_name must be a string"
         assert file_name[-3:] == ".h5", "file_name must end in: \".h5\""
-        self.compiled_network.save_weights(
+        self.predictor_network.save_weights(
             "./models/" + file_name, save_format='h5')
         print("The model has been saved under: " + "./models/" + file_name)
 
     def load_model(self, file_name):
         assert type(file_name) is str, "file_name must be a string"
-        self.compiled_network.load_weights("./models/" + file_name)
+        self.predictor_network.load_weights("./models/" + file_name)
         print("Model successfully loaded.")
