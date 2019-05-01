@@ -8,6 +8,7 @@ class PredictionNN:
     
     def __init__(self, embedding_handler):
         self.embedding_handler = embedding_handler
+        #this is just a basic placeholder network
         #input layer
         inputs = tf.keras.Input(shape=((2*embedding_handler.embedding_dim),))
         #output layer
@@ -40,7 +41,7 @@ class PredictionNN:
 
         #now we add the embeddings for each team of heros into a vector for each game that looks like:
         #[[radiant team embedding sum],[dire team embedding sum]]
-        embed_sum = np.zeros(shape=(2*self.embedding_handler.embedding_dim,len(dir_teams)))
+        embed_sum = np.zeros(shape=(len(dir_teams),2*self.embedding_handler.embedding_dim))
         for i in range(len(dir_teams)):
 
             rad_sum = np.zeros(shape=self.embedding_handler.embedding_dim)
@@ -51,6 +52,7 @@ class PredictionNN:
             dir_sum = np.zeros(shape=self.embedding_handler.embedding_dim)
             for hero in dir_teams[i]:
                 dir_sum=rad_sum+self.embedding_handler.get_hero_embedding(hero)
+            
             embed_sum[i,self.embedding_handler.embedding_dim:] = dir_sum
         #done!
         self.processed_data = embed_sum
