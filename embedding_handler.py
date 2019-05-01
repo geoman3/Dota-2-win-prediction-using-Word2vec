@@ -152,7 +152,8 @@ class EmbeddingNN:
 
     def visualise_embedding(self):
         # Outputs a 2D t-SNE visualisation of the hero embedding
-        embedding = np.zeros(size=(len(self.heroes_df), self.embedding_dim))
+        s = (len(self.heroes_df),self.embedding_dim)
+        embedding = np.zeros(shape=s)
 
         for i in range(len(self.heroes_df)):
             embedding[i,:] = self.get_hero_embedding(hero_nn_number=(i+1))
@@ -163,5 +164,5 @@ class EmbeddingNN:
         plt.scatter(x, y)
 
         for i, name in self.nn_to_name.items():
-            plt.annotate(name, (x[i], y[i]))
+            plt.annotate(name, (x[i-1], y[i-1]))
         plt.show()
