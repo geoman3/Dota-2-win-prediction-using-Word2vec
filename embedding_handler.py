@@ -166,3 +166,4 @@ class EmbeddingNN:
         for i, name in self.nn_to_name.items():
             plt.annotate(name, (x[i-1], y[i-1]))
         plt.show()
+
