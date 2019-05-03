@@ -26,7 +26,7 @@ I used this notebook to do some basic analysis on the game data to make sure it 
 
 ### prediction_handler.py
 
-This file contains the handler class for our game prediction model, where the methods again give a concise way of defining training loops and visualising the results.
+This file contains the handler class for our game prediction model, where the methods again give a concise way of defining training loops and visualising the results. The prediciton class combines the embedding vectors on each team by summing them together and then using each team's hero-vector-sum as the inputs.
 
 ### training_scipt.py
 
