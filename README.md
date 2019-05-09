@@ -43,3 +43,6 @@ The raw data scraped from the open dota API
 ### heroes.csv
 
 The summary data for each hero
+
+## Update:
+I have been experimenting with different embedding dimensions and have found that around 16 - 18 dimensions tends to give the most coherent results in terms of outputting sensible heroes from the k_closest_heroes method, however I have been having little success with using the embeddings in a win prediction network, achieving accuracies of ~54%-55% which is about as good as guessing radiant every time. I am experimenting with different netowrk architectures, different ways of combining the embeddings, and just downloading more data.
