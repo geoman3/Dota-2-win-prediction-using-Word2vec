@@ -8,14 +8,26 @@ class PredictionNN:
     
     def __init__(self, embedding_handler):
         self.embedding_handler = embedding_handler
+        num_heroes = len(embedding_handler.heroes_df['id'])
+        embedding_weights = embedding_handler.compiled_network.layers[2].get_weights()
         #this is just a basic placeholder network
         #input layer
-        inputs = tf.keras.Input(shape=((2*embedding_handler.embedding_dim),))
+        inputs = tf.keras.Input(shape=(10,))
+        #embedding layer
+        embedding = layers.Embedding(num_heroes,embedding_handler.embedding_dim,input_length=10,trainable=True)(inputs)
+        flattener = layers.Flatten()(embedding)
+        #hidden layer - not finalised still tweaking parameters
+        hidden1 = layers.Dense(80, activation='sigmoid')(flattener)
+        hidden2 = layers.Dense(80, activation='sigmoid')(hidden1)
+        hidden3 = layers.Dense(80, activation='sigmoid')(hidden2)
+        hidden4 = layers.Dense(80, activation='sigmoid')(hidden3)
+        hidden5 = layers.Dense(80, activation='sigmoid')(hidden4)
         #output layer
-        output = layers.Dense(1, activation='sigmoid')(inputs)
+        output = layers.Dense(1, activation='sigmoid')(hidden5)
         #combined network
         predictor_network = tf.keras.Model(inputs=inputs,outputs=output)
         predictor_network.compile(optimizer='rmsprop', loss='binary_crossentropy', metrics=['accuracy'])
+        print(predictor_network.summary())
         self.predictor_network = predictor_network
 
     def load_odota_data(self, data):
@@ -39,23 +51,10 @@ class PredictionNN:
             for j, hero in enumerate(team):
                 dir_teams[i][j] = self.embedding_handler.api_to_nn[hero]
 
-        #now we add the embeddings for each team of heros into a vector for each game that looks like:
-        #[[radiant team embedding sum],[dire team embedding sum]]
-        embed_sum = np.zeros(shape=(len(dir_teams),2*self.embedding_handler.embedding_dim))
-        for i in range(len(dir_teams)):
-
-            rad_sum = np.zeros(shape=self.embedding_handler.embedding_dim)
-            for hero in rad_teams[i]:
-                rad_sum=rad_sum+self.embedding_handler.get_hero_embedding(hero_nn_number=hero)
-            embed_sum[i,:self.embedding_handler.embedding_dim] = rad_sum
-
-            dir_sum = np.zeros(shape=self.embedding_handler.embedding_dim)
-            for hero in dir_teams[i]:
-                dir_sum=rad_sum+self.embedding_handler.get_hero_embedding(hero)
-            
-            embed_sum[i,self.embedding_handler.embedding_dim:] = dir_sum
+        processed_data = np.array(list(map(list.__add__, rad_teams, dir_teams)))
+        print(processed_data[:5])
         #done!
-        self.processed_data = embed_sum
+        self.processed_data = processed_data
         self.labels = labels
         print("Data successfully loaded, pass self.train_model() to train the prediction model.")
 
