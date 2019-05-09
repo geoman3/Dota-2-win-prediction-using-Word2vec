@@ -14,7 +14,7 @@ class PredictionNN:
         #input layer
         inputs = tf.keras.Input(shape=(10,))
         #embedding layer
-        embedding = layers.Embedding(num_heroes,embedding_handler.embedding_dim,input_length=10,trainable=True)(inputs)
+        embedding = layers.Embedding(num_heroes,embedding_handler.embedding_dim,input_length=10,weights=embedding_weights,trainable=False)(inputs)
         flattener = layers.Flatten()(embedding)
         #hidden layer - not finalised still tweaking parameters
         hidden1 = layers.Dense(80, activation='sigmoid')(flattener)
