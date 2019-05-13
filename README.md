@@ -49,3 +49,7 @@ I have been experimenting with different embedding dimensions and have found tha
 
 ## Update 2:
 After extensive testing I was unable to improve the prediction model beyond 55% validation accuracy using the word2vec embeddings, however when I tried training the embeddings directly on the prediction network, performance increased to 58%. While this result is unsatisfying it is informative, it is possible (expected even) that future models out-perform my own, however it is also possible that this indicates that the draft might not have as strong an effect on the outcome of a match as one might think. Many factors affect the outcome of a game of dota that are not accounted for in this model (like player skill, player behaviour score etc.) so this could serve as a good starting point for future models.
+
+## Hero Embedding visualisation using TSNE
+![Figure_1](https://user-images.githubusercontent.com/49737274/57620267-9af3f180-75cb-11e9-866f-111dc06d5a3e.png)
+This visualisation was done on a 16 dimensional embedding
