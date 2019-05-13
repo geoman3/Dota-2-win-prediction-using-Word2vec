@@ -26,7 +26,7 @@ I used this notebook to do some basic analysis on the game data to make sure it 
 
 ### prediction_handler.py
 
-This file contains the handler class for our game prediction model, where the methods again give a concise way of defining training loops and visualising the results. (Not yet written)
+This file contains the handler class for our game prediction model, where the methods again give a concise way of defining training loops and visualising the results. The prediciton class combines the embedding vectors on each team by summing them together and then using each team's hero-vector-sum as the inputs.
 
 ### training_scipt.py
 
@@ -43,3 +43,9 @@ The raw data scraped from the open dota API
 ### heroes.csv
 
 The summary data for each hero
+
+## Update:
+I have been experimenting with different embedding dimensions and have found that around 16 - 18 dimensions tends to give the most coherent results in terms of outputting sensible heroes from the k_closest_heroes method, however I have been having little success with using the embeddings in a win prediction network, achieving accuracies of ~54%-55% which is about as good as guessing radiant every time. I am experimenting with different netowrk architectures, different ways of combining the embeddings, and just downloading more data.
+
+## Update 2:
+After extensive testing I was unable to improve the prediction model beyond 55% validation accuracy using the word2vec embeddings, however when I tried training the embeddings directly on the prediction network, performance increased to 58%. While this result is unsatisfying it is informative, it is possible (expected even) that future models out-perform my own, however it is also possible that this indicates that the draft might not have as strong an effect on the outcome of a match as one might think. Many factors affect the outcome of a game of dota that are not accounted for in this model (like player skill, player behaviour score etc.) so this could serve as a good starting point for future models.
